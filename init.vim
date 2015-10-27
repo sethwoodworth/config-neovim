@@ -1,5 +1,5 @@
 " A neovim configuration using vim-plugged
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-sensible'   " being merged into nvim default soon
 Plug 'sjl/badwolf'          " colorscheme
 Plug 'nathanaelkane/vim-indent-guides', {'for': ['html', 'htmldjango']}
