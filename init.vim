@@ -14,10 +14,10 @@ Plug 'tpope/vim-commentary'
 
 Plug 'kassio/neoterm'
 
-Plug 'junegunn/fzf', { 'tag': '0.12.2', 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim', { 'commit': '4d91156' }
+Plug 'junegunn/fzf', { 'tag': '0.15.9', 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim', { 'commit': '2066643' }
 
-Plug 'neomake/neomake', { 'commit': 'b6a7118' }
+Plug 'neomake/neomake' ", { 'commit': 'b6a7118' }
 
 
 Plug 'honza/vim-snippets'
@@ -59,7 +59,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim', {'for' : ['python', 'ruby', 'html', 'css']}
 
-Plug 'klen/python-mode', {'for' : 'python'}
+" Plug 'klen/python-mode', {'for' : 'python'}
 Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']}
 Plug 'jmcantrell/vim-virtualenv', {'for' : 'python'}
 
@@ -76,6 +76,9 @@ Plug 'tpope/vim-rails', {'for' : 'ruby'}
 Plug 'tpope/vim-endwise'
 
 Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'}
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fishbullet/deoplete-ruby'
+
 
 " Plug 'vim-scripts/ShowMarks'
 " Plug 'vim-scripts/DrawIt'
@@ -154,17 +157,6 @@ autocmd Filetype python setlocal shiftwidth=4 softtabstop=4
 
 " numberwang
 set number
-function! g:NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunc
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
-autocmd FocusLost * :set number
-autocmd FocusGained * :set relativenumber
 
 " if you move to another pane or window, save!
 autocmd FocusLost * silent! wa
@@ -211,7 +203,7 @@ nnoremap <leader>v `[v`]
 nnoremap <leader>s :Cov<CR>
 nnoremap <leader>o :NERDTreeToggle<CR>
 nnoremap <leader>a :Ack 
-nnoremap <leader><leader> :call NumberToggle()<CR>
+nnoremap <leader><leader> :nohls<CR>
 
 nnoremap <leader>c :call neoterm#test#run('current')<CR>
 nnoremap <leader>f :call neoterm#test#run('file')<CR>
@@ -265,7 +257,8 @@ let g:gitgutter_enabled = 0
 " Neomake
 " run on every buffer save
 autocmd! BufWritePost *.rb Neomake
-" let g:neomake_ruby_enabled_makers = ['rubocop']
+let g:neomake_ruby_enabled_makers = ['rubocop']
+" let g:neomake_python_enabled_markers = []
 
 
 " Rails / ruby
@@ -295,3 +288,6 @@ nmap s <Plug>(easymotion-overwin-f)
 
 " Ultisnips
 let g:UltiSnipsSnippetsDir='/home/seth/.config/nvim/snippets/'
+
+" Use deoplete
+let g:deoplete#enable_at_startup = 1
