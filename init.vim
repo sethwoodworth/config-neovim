@@ -264,21 +264,33 @@ let ruby_no_comment_fold = 1
 " Neoterm
 let g:neoterm_size = 80
 let g:neoterm_position = 'vertical'
+let g:neoterm_autoscroll = 1
+command! -nargs=+ TT Topen | Ts
 
 " Completion: Using deoplete.
-let g:deoplete#enable_at_startup = 0
 let g:deoplete#sources = {}
 let g:deoplete#sources.python = ['buffer', 'tag' , 'member', 'omni']
 let g:deoplete#sources.ruby = ['buffer', 'tag'] ", 'member', 'omni']
 let g:deoplete#auto_completion_start_length = 5
 let g:deoplete#max_list = 50
-
-" EasyMotion
-" let g:EasyMotion_do_mapping = 0
-nmap s <Plug>(easymotion-overwin-f)
+let g:deoplete#enable_at_startup = 1
 
 " Ultisnips
 let g:UltiSnipsSnippetsDir='/home/seth/.config/nvim/snippets/'
 
-" Use deoplete
-let g:deoplete#enable_at_startup = 1
+" Ack.vim: use ag, the silver searcher
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" Universal Ctags rspec support
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+    \ }
