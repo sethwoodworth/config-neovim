@@ -19,57 +19,28 @@ Plug 'junegunn/fzf.vim', { 'commit': '2066643' }
 
 Plug 'neomake/neomake' ", { 'commit': 'b6a7118' }
 
+" Search file contents
+Plug 'mileszs/ack.vim'
 
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
-Plug 'sirtaj/vim-openscad'
 
 " Tag functionality
 Plug 'vim-scripts/AutoTag', {'on': 'TagbarToggle'}
 Plug 'majutsushi/tagbar' ", {'on': 'TagbarToggle'}
 
-Plug 'jceb/vim-orgmode'
-
-" END keep
-
+Plug 'tpope/vim-vinegar'
 Plug 'fidian/hexmode'
+Plug 'dietsche/vim-lastplace'
+Plug 'tpope/vim-fugitive'
+Plug 'w0ng/vim-hybrid'
 
-" Check config
-Plug 'bling/vim-airline'
-Plug 'nathanaelkane/vim-indent-guides'
-
-" Unused, learn
-Plug 'easymotion/vim-easymotion'
-
-" Unused, remove?
-" Plug 'craigemery/vim-autotag'
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'chriskempson/base16-vim'
-" Plug 'mileszs/ack.vim'
-" Plug 'kchmck/vim-coffee-script'
-" Plug 'jamessan/vim-gnupg'
-" Plug 'godlygeek/tabular'
-" Plug 'Shougo/deoplete.nvim'
-" Plug 'scrooloose/syntastic', {'for' : ['sh', 'bash', 'ruby']}
-" Plug 'floobits/floobits-neovim'
-" Plug 'ctrlpvim/ctrlp.vim'
-
-" To check
-
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim', {'for' : ['python', 'ruby', 'html', 'css']}
-
-" Plug 'klen/python-mode', {'for' : 'python'}
-Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']}
-Plug 'jmcantrell/vim-virtualenv', {'for' : 'python'}
-
+" Asciidoc
 Plug 'dahu/vimple', {'for' : 'asciidoc'}
 Plug 'dahu/Asif', {'for' : 'asciidoc'}
 Plug 'vim-scripts/SyntaxRange', {'for' : 'asciidoc'}
 Plug 'dahu/vim-asciidoc', {'for' : 'asciidoc'}
 Plug 'vim-voom/VOoM', {'for' : ['markdown', 'asciidoc']}
-
-Plug 'tpope/vim-vinegar'
 
 " Ruby/rails
 Plug 'tpope/vim-rails', {'for' : 'ruby'}
@@ -79,17 +50,37 @@ Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'fishbullet/deoplete-ruby'
 
+" END keep
+
+" Check config
+Plug 'bling/vim-airline'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim', {'for' : ['python', 'ruby', 'html', 'css']}
+" Plug 'klen/python-mode', {'for' : 'python'}
+Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']}
+Plug 'jmcantrell/vim-virtualenv', {'for' : 'python'}
+
+" Unused, learn
+" Plug 'easymotion/vim-easymotion'
+
+" Unused, remove?
+" Plug 'jceb/vim-orgmode'
+" Plug 'sirtaj/vim-openscad'
+" Plug 'craigemery/vim-autotag'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'chriskempson/base16-vim'
+" Plug 'kchmck/vim-coffee-script'
+" Plug 'jamessan/vim-gnupg'
+" Plug 'godlygeek/tabular'
+" Plug 'Shougo/deoplete.nvim'
+" Plug 'scrooloose/syntastic', {'for' : ['sh', 'bash', 'ruby']}
+" Plug 'floobits/floobits-neovim'
+
+
 
 " Plug 'vim-scripts/ShowMarks'
 " Plug 'vim-scripts/DrawIt'
-
-Plug 'dietsche/vim-lastplace'
-
-Plug 'tpope/vim-fugitive'
-
-
-Plug 'w0ng/vim-hybrid'
-
 call plug#end()
 
 " Unicode by default
