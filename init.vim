@@ -168,39 +168,39 @@ function! AirlineInit()
 endfunction
 " autocmd user AirlineAfterInit call AirlineInit()
 
-" Leader settings
+" " Leader settings
 " <space> as leader
 let mapleader = " "
+vnoremap <Leader>2 :TREPLSendSelection
+nnoremap <Leader>2 :TREPLSendLine
+nnoremap <leader>"' :s/\"/\'/g <cr> :nohls <cr>
+nnoremap <leader>'" :s/\'/\"/g <cr> :nohls <cr>
+nnoremap <leader><leader> :nohls<CR>
+nnoremap <leader>H :'<,'>s/:\(\w\+\)\s\+=>\s\+/\1: /g<CR>
+nnoremap <leader>L :lclose<CR>
+nnoremap <leader>M zM
+nnoremap <leader>R zR
+nnoremap <leader>T :TagbarOpenAutoClose<CR>
+nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
+nnoremap <leader>a :Ack
+nnoremap <leader>c :call neoterm#test#run('current')<CR>
 nnoremap <leader>e :lwindow<CR>
 nnoremap <leader>ev <C-w><C-v>:e $MYVIMRC<CR>
+nnoremap <leader>f :call neoterm#test#run('file')<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>h :s/:\(\w\+\)\s\+=>\s\+/\1: /g<CR>
-nnoremap <leader>H :'<,'>s/:\(\w\+\)\s\+=>\s\+/\1: /g<CR>
 nnoremap <leader>ii :IndentGuidesToggle<CR>
 nnoremap <leader>l :lw<cr>
-nnoremap <leader>L :lclose<CR>
 nnoremap <leader>m zm
-nnoremap <leader>M zM
-nnoremap <leader>r zr
-nnoremap <leader>R zR
-
-nnoremap <leader>p :set paste!<CR>
-nnoremap <leader>t :TagbarToggle<CR>
-nnoremap <leader>T :TagbarOpenAutoClose<CR>
-nnoremap <leader>w <C-w>v
-nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
-nnoremap <leader>v `[v`]
-
-nnoremap <leader>s :Cov<CR>
 nnoremap <leader>o :NERDTreeToggle<CR>
-nnoremap <leader>a :Ack 
-nnoremap <leader><leader> :nohls<CR>
+nnoremap <leader>p :set paste!<CR>
+nnoremap <leader>r zr
+nnoremap <leader>s :Cov<CR>
+nnoremap <leader>t :TagbarToggle<CR>
+nnoremap <leader>tt :TT
+nnoremap <leader>v `[v`]
+nnoremap <leader>w <C-w>v
 
-nnoremap <leader>c :call neoterm#test#run('current')<CR>
-nnoremap <leader>f :call neoterm#test#run('file')<CR>
-
-nnoremap <leader>'" :s/\'/\"/g <cr> :nohls <cr>
-nnoremap <leader>"' :s/\"/\'/g <cr> :nohls <cr>
 " that thing ari showed me
 " :w!! will save file as root
 cmap w!! w !sudo tee %
