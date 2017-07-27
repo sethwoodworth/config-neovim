@@ -144,7 +144,7 @@ tnoremap <Esc> <C-\><C-n>
 
 " Tab settings
 set expandtab shiftwidth=2 softtabstop=2
-autocmd Filetype python setlocal shiftwidth=4 softtabstop=4
+autocmd Filetype python setlocal expandtab shiftwidth=4 softtabstop=4
 
 " numberwang
 set number
