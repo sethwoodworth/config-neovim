@@ -13,6 +13,7 @@ Plug 'blueyed/vim-tmux-navigator'
 Plug 'tpope/vim-commentary'
 
 Plug 'kassio/neoterm'
+Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']}
 
 Plug 'junegunn/fzf', { 'tag': '0.15.9', 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim', { 'commit': '2066643' }
@@ -58,7 +59,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim', {'for' : ['python', 'ruby', 'html', 'css']}
 " Plug 'klen/python-mode', {'for' : 'python'}
-Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']}
 Plug 'jmcantrell/vim-virtualenv', {'for' : 'python'}
 
 " Unused, learn
@@ -73,7 +73,6 @@ Plug 'jmcantrell/vim-virtualenv', {'for' : 'python'}
 " Plug 'kchmck/vim-coffee-script'
 " Plug 'jamessan/vim-gnupg'
 " Plug 'godlygeek/tabular'
-" Plug 'Shougo/deoplete.nvim'
 " Plug 'scrooloose/syntastic', {'for' : ['sh', 'bash', 'ruby']}
 " Plug 'floobits/floobits-neovim'
 
@@ -182,11 +181,11 @@ nnoremap <leader>M zM
 nnoremap <leader>R zR
 nnoremap <leader>T :TagbarOpenAutoClose<CR>
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
-nnoremap <leader>a :Ack
-nnoremap <leader>c :call neoterm#test#run('current')<CR>
+nnoremap <leader>a :Ack 
+nnoremap <leader>c :TestNearest<CR>
 nnoremap <leader>e :lwindow<CR>
 nnoremap <leader>ev <C-w><C-v>:e $MYVIMRC<CR>
-nnoremap <leader>f :call neoterm#test#run('file')<CR>
+nnoremap <leader>f :TestFile<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>h :s/:\(\w\+\)\s\+=>\s\+/\1: /g<CR>
 nnoremap <leader>ii :IndentGuidesToggle<CR>
@@ -254,12 +253,11 @@ let g:neomake_ruby_enabled_makers = ['rubocop']
 
 " Rails / ruby
 " :A & :R jump to Alternate and Related files see: rails-alternate
-
+let ruby_fold = 1
 let ruby_minlines = 500
+let ruby_no_comment_fold = 1
 let ruby_operators = 1
 let ruby_space_errors = 1
-let ruby_fold = 1
-let ruby_no_comment_fold = 1
 
 " Neoterm
 let g:neoterm_size = 80
@@ -294,3 +292,6 @@ let g:tagbar_type_ruby = {
         \ 'F:singleton methods'
     \ ]
     \ }
+
+" Vim-test configuration
+let test#strategy = 'neoterm'
