@@ -18,9 +18,8 @@ Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']}
 Plug 'junegunn/fzf', { 'tag': '0.15.9', 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim', { 'commit': '2066643' }
 
-Plug 'neomake/neomake' ", { 'commit': 'b6a7118' }
+Plug 'neomake/neomake'
 
-" Search file contents
 Plug 'mileszs/ack.vim'
 
 Plug 'honza/vim-snippets'
@@ -28,7 +27,7 @@ Plug 'SirVer/ultisnips'
 
 " Tag functionality
 Plug 'vim-scripts/AutoTag', {'on': 'TagbarToggle'}
-Plug 'majutsushi/tagbar' ", {'on': 'TagbarToggle'}
+Plug 'majutsushi/tagbar' , {'on': 'TagbarToggle'}
 
 Plug 'tpope/vim-vinegar'
 Plug 'fidian/hexmode'
@@ -36,16 +35,10 @@ Plug 'dietsche/vim-lastplace'
 Plug 'tpope/vim-fugitive'
 Plug 'w0ng/vim-hybrid'
 
-" Asciidoc
-Plug 'dahu/vimple', {'for' : 'asciidoc'}
-Plug 'dahu/Asif', {'for' : 'asciidoc'}
-Plug 'vim-scripts/SyntaxRange', {'for' : 'asciidoc'}
-Plug 'dahu/vim-asciidoc', {'for' : 'asciidoc'}
-Plug 'vim-voom/VOoM', {'for' : ['markdown', 'asciidoc']}
-
-" Ruby/rails
 Plug 'tpope/vim-rails', {'for' : 'ruby'}
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-unimpaired'
+
 
 Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -145,7 +138,6 @@ tnoremap <Esc> <C-\><C-n>
 set expandtab shiftwidth=2 softtabstop=2
 autocmd Filetype python setlocal expandtab shiftwidth=4 softtabstop=4
 
-" numberwang
 set number
 
 " if you move to another pane or window, save!
@@ -245,10 +237,10 @@ let g:fzf_buffers_jump = 0
 let g:gitgutter_enabled = 0
 
 " Neomake
-" run on every buffer save
+autocmd! BufWritePost *.py Neomake
 autocmd! BufWritePost *.rb Neomake
 let g:neomake_ruby_enabled_makers = ['rubocop']
-" let g:neomake_python_enabled_markers = []
+let g:neomake_python_enabled_markers = ['pylint', 'python']
 
 
 " Rails / ruby
