@@ -9,7 +9,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'morhetz/gruvbox'
 
-Plug 'blueyed/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-commentary'
 
 Plug 'kassio/neoterm'
@@ -28,6 +28,7 @@ Plug 'SirVer/ultisnips'
 " Tag functionality
 Plug 'vim-scripts/AutoTag', {'on': 'TagbarToggle'}
 Plug 'majutsushi/tagbar' , {'on': 'TagbarToggle'}
+" Plug 'craigemery/vim-autotag'
 
 Plug 'tpope/vim-vinegar'
 Plug 'fidian/hexmode'
@@ -39,12 +40,9 @@ Plug 'tpope/vim-rails', {'for' : 'ruby'}
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-unimpaired'
 
-
 Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'fishbullet/deoplete-ruby'
-
-" END keep
 
 " Check config
 Plug 'bling/vim-airline'
@@ -52,27 +50,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim', {'for' : ['python', 'ruby', 'html', 'css']}
 " Plug 'klen/python-mode', {'for' : 'python'}
-Plug 'jmcantrell/vim-virtualenv', {'for' : 'python'}
-
-" Unused, learn
-" Plug 'easymotion/vim-easymotion'
-
-" Unused, remove?
-" Plug 'jceb/vim-orgmode'
-" Plug 'sirtaj/vim-openscad'
-" Plug 'craigemery/vim-autotag'
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'chriskempson/base16-vim'
-" Plug 'kchmck/vim-coffee-script'
-" Plug 'jamessan/vim-gnupg'
-" Plug 'godlygeek/tabular'
-" Plug 'scrooloose/syntastic', {'for' : ['sh', 'bash', 'ruby']}
-" Plug 'floobits/floobits-neovim'
-
-
-
-" Plug 'vim-scripts/ShowMarks'
-" Plug 'vim-scripts/DrawIt'
+Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'}
 call plug#end()
 
 " Unicode by default
@@ -174,6 +152,7 @@ nnoremap <leader>R zR
 nnoremap <leader>T :TagbarOpenAutoClose<CR>
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 nnoremap <leader>a :Ack 
+nnoremap <leader>b i__import__('IPython').embed()<esc>
 nnoremap <leader>c :TestNearest<CR>
 nnoremap <leader>e :lwindow<CR>
 nnoremap <leader>ev <C-w><C-v>:e $MYVIMRC<CR>
@@ -203,6 +182,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 " Python-mode settings
 let g:python_host_prog='/usr/bin/python2'
+" let g:python_host_prog='/home/seth/.local/share/virtualenvs/cg-analyticswarehouse-dDTs--V4/bin/python'
 let g:pymode_folding = 0
 " vaC, vaM -- select class, method
 " <leader>b insert breakpoint
@@ -237,7 +217,7 @@ let g:fzf_buffers_jump = 0
 let g:gitgutter_enabled = 0
 
 " Neomake
-autocmd! BufWritePost *.py Neomake
+autocmd! BufWritePost *.py Neomake pylint
 autocmd! BufWritePost *.rb Neomake
 let g:neomake_ruby_enabled_makers = ['rubocop']
 let g:neomake_python_enabled_markers = ['pylint', 'python']
@@ -259,14 +239,14 @@ command! -nargs=+ TT Topen | Ts
 
 " Completion: Using deoplete.
 let g:deoplete#sources = {}
-let g:deoplete#sources.python = ['buffer', 'tag' , 'member', 'omni']
+let g:deoplete#sources.python = ['ultisnips' , 'buffer', 'tag' , 'member', 'omni']
 let g:deoplete#sources.ruby = ['buffer', 'tag'] ", 'member', 'omni']
-let g:deoplete#auto_completion_start_length = 5
+let g:deoplete#auto_completion_start_length = 3
 let g:deoplete#max_list = 50
 let g:deoplete#enable_at_startup = 1
 
 " Ultisnips
-let g:UltiSnipsSnippetsDir='/home/seth/.config/nvim/snippets/'
+" let g:UltiSnipsSnippetsDir='/home/seth/.config/nvim/snippets/'
 
 " Ack.vim: use ag, the silver searcher
 if executable('ag')
