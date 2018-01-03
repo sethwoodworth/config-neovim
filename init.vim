@@ -52,7 +52,6 @@ Plug 'tomtom/tlib_vim', {'for' : ['python', 'ruby', 'html', 'css']}
 " Plug 'klen/python-mode', {'for' : 'python'}
 Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'}
 Plug 'mitsuhiko/vim-python-combined'
-Plug 'orlandov/vimfluence'
 call plug#end()
 
 " Colorscheme
