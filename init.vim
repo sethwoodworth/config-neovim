@@ -1,6 +1,6 @@
 " A neovim configuration using vim-plugged
-if $TERM == "xterm-256color"
-  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+if $TERM == "screen-256color"
+  set termguicolors
 end
 
 call plug#begin('~/.config/nvim/plugged')
@@ -51,18 +51,12 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim', {'for' : ['python', 'ruby', 'html', 'css']}
 " Plug 'klen/python-mode', {'for' : 'python'}
 Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'}
+Plug 'mitsuhiko/vim-python-combined'
+Plug 'orlandov/vimfluence'
 call plug#end()
 
-" Unicode by default
-scriptencoding utf-8
-
 " Colorscheme
-" set t_Co=256
-" let base16colorspace=256
-" let g:base16_shell_path='/home/seth/.config/base16-shell/'
 set background=dark
-" let g:badwolf_darkgutter = 1
-" colorscheme badwolf
 let g:gruvbox_italic = 1
 colorscheme gruvbox
 
@@ -110,16 +104,13 @@ tnoremap <C-l> <C-\><C-n>l
 " nvim terminal
 tnoremap <Esc> <C-\><C-n>
 
-" set g:terminal_scrollback_buffer_size=10000
-
 " Tab settings
 set expandtab shiftwidth=2 softtabstop=2
-autocmd Filetype python setlocal expandtab shiftwidth=4 softtabstop=4
+augroup python
+  autocmd Filetype python setlocal expandtab shiftwidth=4 softtabstop=4
+augroup END
 
 set number
-
-" if you move to another pane or window, save!
-autocmd FocusLost * silent! wa
 
 " folding
 set foldlevelstart=99  " begin with all folds showing
@@ -135,7 +126,6 @@ function! AirlineInit()
   call airline#parts#define_function('neoterm', 'NeotermStatus')
   let g:airline_section_warning = airline#section#create_right(['whitespace', 'neoterm'])
 endfunction
-" autocmd user AirlineAfterInit call AirlineInit()
 
 " " Leader settings
 " <space> as leader
@@ -151,7 +141,6 @@ nnoremap <leader>M zM
 nnoremap <leader>R zR
 nnoremap <leader>T :TagbarOpenAutoClose<CR>
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
-nnoremap <leader>a :Ack 
 nnoremap <leader>b i__import__('IPython').embed()<esc>
 nnoremap <leader>c :TestNearest<CR>
 nnoremap <leader>e :lwindow<CR>
@@ -245,13 +234,7 @@ let g:deoplete#auto_completion_start_length = 3
 let g:deoplete#max_list = 50
 let g:deoplete#enable_at_startup = 1
 
-" Ultisnips
-" let g:UltiSnipsSnippetsDir='/home/seth/.config/nvim/snippets/'
-
-" Ack.vim: use ag, the silver searcher
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+let g:UltiSnipsSnippetsDir='/home/seth/.config/nvim/snippets/'
 
 " Universal Ctags rspec support
 let g:tagbar_type_ruby = {
