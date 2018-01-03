@@ -20,8 +20,6 @@ Plug 'junegunn/fzf.vim', { 'commit': '2066643' }
 
 Plug 'neomake/neomake'
 
-Plug 'mileszs/ack.vim'
-
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 
@@ -39,6 +37,8 @@ Plug 'w0ng/vim-hybrid'
 Plug 'tpope/vim-rails', {'for' : 'ruby'}
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
 Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
