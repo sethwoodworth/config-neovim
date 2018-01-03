@@ -170,6 +170,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 " Python-mode settings
 let g:python_host_prog='/usr/bin/python2'
+let g:python3_host_prog='/usr/bin/python3'
 " let g:python_host_prog='/home/seth/.local/share/virtualenvs/cg-analyticswarehouse-dDTs--V4/bin/python'
 let g:pymode_folding = 0
 " vaC, vaM -- select class, method
