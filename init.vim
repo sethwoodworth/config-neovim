@@ -5,6 +5,7 @@ end
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'junegunn/vader.vim'
 " START keep
 
 Plug 'morhetz/gruvbox'
@@ -169,8 +170,8 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Python-mode settings
-let g:python_host_prog='/usr/bin/python2'
-let g:python3_host_prog='/usr/bin/python3'
+" let g:python_host_prog='/usr/bin/python'
+let g:python3_host_prog='/home/swoodworth/.local/share/virtualenvs/nvim-V95aoDmf/bin/python'
 " let g:python_host_prog='/home/seth/.local/share/virtualenvs/cg-analyticswarehouse-dDTs--V4/bin/python'
 let g:pymode_folding = 0
 " vaC, vaM -- select class, method
