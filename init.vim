@@ -1,58 +1,41 @@
-" A neovim configuration using vim-plugged
 if $TERM == "screen-256color"
   set termguicolors
 end
 
 call plug#begin('~/.config/nvim/plugged')
-
-Plug 'junegunn/vader.vim'
-" START keep
-
-Plug 'morhetz/gruvbox'
-
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-commentary'
-
-Plug 'kassio/neoterm'
-Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']}
-
-Plug 'junegunn/fzf', { 'tag': '0.15.9', 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim', { 'commit': '2066643' }
-
-Plug 'neomake/neomake'
-
-Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
-
-" Tag functionality
-Plug 'vim-scripts/AutoTag', {'on': 'TagbarToggle'}
-Plug 'majutsushi/tagbar' , {'on': 'TagbarToggle'}
 " Plug 'craigemery/vim-autotag'
-
-Plug 'tpope/vim-vinegar'
-Plug 'fidian/hexmode'
-Plug 'dietsche/vim-lastplace'
-Plug 'tpope/vim-fugitive'
-Plug 'w0ng/vim-hybrid'
-
-Plug 'tpope/vim-rails', {'for' : 'ruby'}
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-
-Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'}
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'fishbullet/deoplete-ruby'
-
-" Check config
-Plug 'bling/vim-airline'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim', {'for' : ['python', 'ruby', 'html', 'css']}
 " Plug 'klen/python-mode', {'for' : 'python'}
-Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'}
-Plug 'mitsuhiko/vim-python-combined'
+Plug 'MarcWeber/vim-addon-mw-utils' " required lib
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete async
+Plug 'SirVer/ultisnips' " snippets
+Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'} " highlights git line status
+Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'} " highlights code coverage
+Plug 'bling/vim-airline' " fancy statusline
+Plug 'christoomey/vim-tmux-navigator' " C-h,j,k,l navigation between tmux and vim
+Plug 'dietsche/vim-lastplace' " reopen a file the last place we were
+Plug 'fidian/hexmode' " view/edit binary as hex
+Plug 'fishbullet/deoplete-ruby', {'for' : 'ruby'} " autocomplete for ruby
+Plug 'honza/vim-snippets' " snippets
+Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']} " runs tests
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy file search
+Plug 'junegunn/fzf.vim' " fuzzy file search
+Plug 'junegunn/vader.vim' " test vimscript
+Plug 'kassio/neoterm' " terminal in neovim
+Plug 'majutsushi/tagbar' , {'on': 'TagbarToggle'} " a module map
+Plug 'mitsuhiko/vim-python-combined' " improved python syntax
+Plug 'morhetz/gruvbox' " colorscheme
+Plug 'nathanaelkane/vim-indent-guides' " highlight indent level
+Plug 'neomake/neomake' " async linter and highlighter
+Plug 'tomtom/tlib_vim', {'for' : ['python', 'ruby', 'html', 'css']} " library FIXME: document what requires
+Plug 'tpope/vim-commentary' " idiomatic line comment toggling vim syntax
+Plug 'tpope/vim-endwise' " better xml tag support
+Plug 'tpope/vim-fugitive' " git integration
+Plug 'tpope/vim-rails', {'for' : 'ruby'} " rails
+Plug 'tpope/vim-repeat' " repeat tpope vim syntax extensions
+Plug 'tpope/vim-surround' " idiomatic matching surrounding character vim syntax
+Plug 'tpope/vim-unimpaired' " pairs of extra key bindings
+Plug 'tpope/vim-vinegar' " better vim file browser
+Plug 'vim-scripts/AutoTag', {'on': 'TagbarToggle'} " auto update local tags file
 call plug#end()
 
 " Colorscheme
