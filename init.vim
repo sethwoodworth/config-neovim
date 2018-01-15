@@ -43,40 +43,40 @@ set background=dark
 let g:gruvbox_italic = 1
 colorscheme gruvbox
 
-
 " Visual behaviors
-set list listchars=tab:·\ ,trail:≁,nbsp:∝
-set noautoindent
-set showmatch matchtime=2
-set ttimeoutlen=10
-set visualbell
-set wildmode=list:longest
+set list listchars=tab:·\ ,trail:≁,nbsp:∝ " show whitespace and tabs as unicode
+" set noautoindent " don't indent for me
+set showmatch matchtime=2 " show matching brackets
+set splitbelow " open vertical splits below the current pane
+set splitright " open horizontal splits right of the current pane
+set ttimeoutlen=10 " timeout to wait for followup keycodes
+set visualbell " use visual bell instead of beeping
+set wildmode=list:longest " when more than one match, list, match longest string
 
-" mice are a pernicious habit, (but not literally)
-set mouse=
-
-" Search behavior: Smartcase
+" Searching
 set ignorecase " you MUST set this to get smart case search
 set smartcase  " Together this means that searches are
                " case insensitive until you specify a capital
-" Search behavior: "very magic"
-nnoremap / /\v
-vnoremap / /\v
+" search behavior: no magic
+nnoremap / /\M
+vnoremap / /\M
 
-" Split behavior
-set splitbelow " open vertical splits below the current pane
-set splitright " open horizontal splits right of the current pane
 
 " Normal mode bindings
+" `H` moves to first non-whitespace character on a line
+" `L` moves to the last non-blank character of the line
+" `Y` yanks from cursor to end of line
 nnoremap H ^
 nnoremap L g_
 nnoremap Y y$
-nnoremap <F1> <ESC>
 " Switch panes with ctrl + hjkl
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+
+inoremap <F1> <ESC>
 
 " Allow switching from vim terminals
 tnoremap <C-h> <C-\><C-n>h
