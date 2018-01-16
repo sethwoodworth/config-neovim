@@ -62,7 +62,7 @@ set expandtab shiftwidth=2 softtabstop=2
 set ignorecase " you MUST set this to get smart case search
 set smartcase  " Together this means that searches are
                " case insensitive until you specify a capital
-" search behavior: no magic
+" no magic
 nnoremap / /\M
 vnoremap / /\M
 
@@ -92,10 +92,10 @@ tnoremap <C-l> <C-\><C-n>l
 " `<ESC>` switches to Normal mode in terminal
 tnoremap <ESC> <C-\><C-n>
 
-" Insert mode binding:
+" Insert mode binding
 " `<F1>` sends `<ESC>`
 inoremap <F1> <ESC>
-" Command mode binding:
+" Command mode binding
 " `:w!!` saves file as root
 cmap w!! w !sudo tee %
 
@@ -155,12 +155,12 @@ nnoremap <leader>v `[v`]
 " `<l>w` create vertical split
 nnoremap <leader>w <C-w>v
 
+" Python language tab settings
 augroup python
   autocmd Filetype python setlocal expandtab shiftwidth=4 softtabstop=4
 augroup END
 
-
-" vim-airline settings
+" vim-airline
 function! NeotermStatus()
   if exists("g:neoterm_statusline")
     return g:neoterm_statusline
@@ -173,6 +173,7 @@ function! AirlineInit()
 endfunction
 
 " Python-mode settings
+" FIXME: cleanup or remove
 " let g:python_host_prog='/usr/bin/python'
 let g:python3_host_prog='/home/swoodworth/.local/share/virtualenvs/nvim-V95aoDmf/bin/python'
 " let g:python_host_prog='/home/seth/.local/share/virtualenvs/cg-analyticswarehouse-dDTs--V4/bin/python'
@@ -187,7 +188,7 @@ let g:pymode_virtualenv = 0
 " <C-c>g for jump to definition
 
 " FZF
-map <C-P> :FZF<CR>
+nnoremap <C-P> :FZF<CR>
 " CTRL-T open in new tab
 " CTRL-X open in horizontal split
 " CTRL-V open in vertical split
