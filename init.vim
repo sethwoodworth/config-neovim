@@ -13,6 +13,7 @@ Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'} " highlights code coverage
 Plug 'bling/vim-airline' " fancy statusline
 Plug 'christoomey/vim-tmux-navigator' " C-h,j,k,l navigation between tmux and vim
 Plug 'dietsche/vim-lastplace' " reopen a file the last place we were
+Plug 'fatih/vim-hclfmt'
 Plug 'fidian/hexmode' " view/edit binary as hex
 Plug 'fishbullet/deoplete-ruby', {'for' : 'ruby'} " autocomplete for ruby
 Plug 'honza/vim-snippets' " snippets
@@ -35,7 +36,7 @@ Plug 'tpope/vim-repeat' " repeat tpope vim syntax extensions
 Plug 'tpope/vim-surround' " idiomatic matching surrounding character vim syntax
 Plug 'tpope/vim-unimpaired' " pairs of extra key bindings
 Plug 'tpope/vim-vinegar' " better vim file browser
-Plug 'vim-scripts/AutoTag', {'on': 'TagbarToggle'} " auto update local tags file
+Plug 'vim-scripts/AutoTag', {'on' : 'TagbarToggle'} " auto update local tags file
 call plug#end()
 
 " Colorscheme
@@ -78,6 +79,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+" `C-p` runs FZF fuzzy file searcher
+nnoremap <C-p> :FZF<CR>
 " `<F10>` shows syntax highlighting group under cursor
 nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
@@ -188,7 +191,6 @@ let g:pymode_virtualenv = 0
 " <C-c>g for jump to definition
 
 " FZF
-nnoremap <C-P> :FZF<CR>
 " CTRL-T open in new tab
 " CTRL-X open in horizontal split
 " CTRL-V open in vertical split
