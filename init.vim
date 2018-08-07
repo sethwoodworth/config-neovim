@@ -22,6 +22,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy file s
 Plug 'junegunn/fzf.vim' " fuzzy file search
 Plug 'junegunn/vader.vim' " test vimscript
 Plug 'kassio/neoterm' " terminal in neovim
+Plug 'kovetskiy/vim-bash'
 Plug 'majutsushi/tagbar' , {'on': 'TagbarToggle'} " a module map
 Plug 'mitsuhiko/vim-python-combined' " improved python syntax
 Plug 'morhetz/gruvbox' " colorscheme
@@ -36,7 +37,10 @@ Plug 'tpope/vim-repeat' " repeat tpope vim syntax extensions
 Plug 'tpope/vim-surround' " idiomatic matching surrounding character vim syntax
 Plug 'tpope/vim-unimpaired' " pairs of extra key bindings
 Plug 'tpope/vim-vinegar' " better vim file browser
-Plug 'vim-scripts/AutoTag', {'on' : 'TagbarToggle'} " auto update local tags file
+Plug 'vim-scripts/AutoTag', {'on': 'TagbarToggle'} " auto update local tags file
+Plug 'vim-python/python-syntax'
+Plug 'chrisbra/NrrwRgn'
+Plug 'dbsr/vimpy'
 call plug#end()
 
 " Colorscheme
@@ -58,6 +62,7 @@ set wildmode=list:longest " when more than one match, list, match longest string
 
 " Tabs
 set expandtab shiftwidth=2 softtabstop=2
+set textwidth=100
 
 " Search
 set ignorecase " you MUST set this to get smart case search
@@ -149,8 +154,8 @@ nnoremap <leader>m zm
 nnoremap <leader>p :set paste!<CR>
 " `<l>r` fold less (reduce)
 nnoremap <leader>r zr
-" `<l>s` show coverage
-nnoremap <leader>s :Cov<CR>
+" `<l>s` toggle show coverage
+nnoremap <leader>s :Coveragepy show<CR>
 " `<l>t` toggle Tagbar
 nnoremap <leader>t :TagbarToggle<CR>
 " `<l>v` re-select previous paste
@@ -162,6 +167,7 @@ nnoremap <leader>w <C-w>v
 augroup python
   autocmd Filetype python setlocal expandtab shiftwidth=4 softtabstop=4
 augroup END
+let g:python_highlight_all = 1
 
 " vim-airline
 function! NeotermStatus()
@@ -179,7 +185,7 @@ endfunction
 " FIXME: cleanup or remove
 " let g:python_host_prog='/usr/bin/python'
 let g:python3_host_prog='/home/swoodworth/.local/share/virtualenvs/nvim-V95aoDmf/bin/python'
-" let g:python_host_prog='/home/seth/.local/share/virtualenvs/cg-analyticswarehouse-dDTs--V4/bin/python'
+let g:python_host_prog='/home/swoodworth/.local/share/virtualenvs/neovim-P0pe4FPa/bin/python'
 let g:pymode_folding = 0
 " vaC, vaM -- select class, method
 " <leader>b insert breakpoint
@@ -205,8 +211,8 @@ let g:gitgutter_enabled = 0
 " Neomake
 autocmd! BufWritePost *.py Neomake pylint
 autocmd! BufWritePost *.rb Neomake
+let g:neomake_python_enabled_markers = ['pylint', 'mypy']
 let g:neomake_ruby_enabled_makers = ['rubocop']
-let g:neomake_python_enabled_markers = ['pylint', 'python']
 
 
 " Vim-rails
@@ -219,7 +225,7 @@ let ruby_space_errors = 1
 
 " Neoterm
 let g:neoterm_size = 80
-let g:neoterm_position = 'vertical'
+let g:neoterm_default_mod = 'vertical'
 " let g:neoterm_autoscroll = 1
 " command! -nargs=+ TT Topen | Ts
 let g:neoterm_repl_python = 'ipython --no-autoindent --simple-prompt'
