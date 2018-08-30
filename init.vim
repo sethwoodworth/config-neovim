@@ -82,6 +82,9 @@ vnoremap / /\M
 nnoremap H ^
 nnoremap L g_
 nnoremap Y y$
+vnoremap H ^
+vnoremap L g_
+
 " `C-h,j,k,l` switch pane focus
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -123,6 +126,8 @@ nnoremap <leader>"' :s/\"/\'/g <cr> :nohls <cr>
 nnoremap <leader>'" :s/\'/\"/g <cr> :nohls <cr>
 " `<l><l>` clear search highlighting
 nnoremap <leader><leader> :nohls<CR>
+" grep for word under cursor
+nnoremap <leader>G :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " `<l>H` convert selection ruby hashes to hash rockets (incomplete)
 nnoremap <leader>H :'<,'>s/:\(\w\+\)\s\+=>\s\+/\1: /g<CR>
 " `<l>L` close location list
@@ -172,6 +177,11 @@ augroup python
 augroup END
 let g:python_highlight_all = 1
 
+" Grep config
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+
 " vim-airline
 function! NeotermStatus()
   if exists("g:neoterm_statusline")
@@ -196,8 +206,6 @@ let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()  # XXX: breakpoint'
 let g:pymode_complete_on_dot = 0
 let g:pymode_lint_ignore = "E501,E221,E302,E701"
 let g:pymode_virtualenv = 0
-" completion via C-Space
-" <C-c>g for jump to definition
 
 " FZF
 " CTRL-T open in new tab
