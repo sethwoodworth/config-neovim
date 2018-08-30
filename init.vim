@@ -41,6 +41,9 @@ Plug 'vim-scripts/AutoTag', {'on': 'TagbarToggle'} " auto update local tags file
 Plug 'vim-python/python-syntax'
 Plug 'chrisbra/NrrwRgn'
 Plug 'dbsr/vimpy'
+
+Plug 'kalekundert/vim-coiled-snake'
+Plug 'Konfekt/FastFold'
 call plug#end()
 
 " Colorscheme
