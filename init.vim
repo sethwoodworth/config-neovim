@@ -113,6 +113,7 @@ inoremap <F1> <ESC>
 " `:w!!` saves file as root
 cmap w!! w !sudo tee %
 
+
 " Leader bindings
 " <space> as leader, shown here as <l>
 "
@@ -268,3 +269,18 @@ let g:tagbar_type_ruby = {
 
 " Vim-test configuration
 let test#strategy = 'neoterm'
+let test#python#runner = 'pytest'
+
+" Vim-lsp python
+if executable('pyls')
+  au user lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+
+
+" allow folder specific .vimrc files
+set exrc
+set secure
