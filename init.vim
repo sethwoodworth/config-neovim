@@ -202,11 +202,16 @@ nnoremap <leader>w <C-w>v
 " Python language tab settings
 augroup python
   autocmd Filetype python setlocal expandtab shiftwidth=4 softtabstop=4
+  " set csprg=pycscope
 augroup END
 let g:python_highlight_all = 1
 
-" Semshi semantic highlighting
-let g:semshi#error_sign = v:false
+" cscope
+set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+if filereadable("cscope.out")
+  set cscopetag
+  silent cs add cscope.out
+endif
 
 " Grep config
 if executable('ag')
