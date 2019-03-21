@@ -56,9 +56,9 @@ Plug 'dracula/vim'
 " LSP
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'ryanolsonx/vim-lsp-python'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'ryanolsonx/vim-lsp-python'
+" Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " python formatter
 Plug 'ambv/black'
 " multi-column split scrolling
