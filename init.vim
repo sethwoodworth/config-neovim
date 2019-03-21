@@ -228,8 +228,7 @@ function! AirlineInit()
   let g:airline_section_warning = airline#section#create_right(['whitespace', 'neoterm'])
 endfunction
 
-let g:python3_host_prog='/home/swoodworth/.local/share/virtualenvs/nvim-V95aoDmf/bin/python'
-let g:python_host_prog='/home/swoodworth/.local/share/virtualenvs/neovim-P0pe4FPa/bin/python'
+let g:python3_host_prog='~/.local/venvs/nvim/bin/python3'
 
 " FZF
 " CTRL-T open in new tab
@@ -260,7 +259,7 @@ let g:neomake_warning_sign = {'text': '🔔', 'texthl': 'NeomakeWarningSign'}
 
 " python formatter
 " One must install black inside the same virtualenv that hosts python3_host_prog
-let g:black_virtualenv = '/home/swoodworth/.local/share/virtualenvs/nvim-V95aoDmf/'
+let g:black_virtualenv = '~/.local/venvs/nvim/'
 
 " Vim-rails
 " :A & :R jump to Alternate and Related files see: rails-alternate
@@ -287,7 +286,7 @@ let g:deoplete#auto_complete_delay = 100
 let g:deoplete#enable_at_startup = 1
 
 " Ultisnips
-let g:UltiSnipsSnippetsDir='/home/swoodworth/.config/nvim/snippets/'
+let g:UltiSnipsSnippetsDir='~/.config/nvim/snippets/'
 
 " Tagbar
 let g:tagbar_show_visibility = 1
