@@ -18,8 +18,8 @@ Plug 'fidian/hexmode' " view/edit binary as hex
 " Plug 'fishbullet/deoplete-ruby', {'for' : 'ruby'} " autocomplete for ruby
 Plug 'honza/vim-snippets' " snippets
 Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']} " runs tests
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy file search
-Plug '~/.fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy file search
+" Plug '~/.fzf'
 Plug 'junegunn/fzf.vim' " fuzzy file search
 Plug 'junegunn/vader.vim' " test vimscript
 Plug 'kassio/neoterm' " terminal in neovim
