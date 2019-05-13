@@ -14,14 +14,11 @@ Plug 'bling/vim-airline' " fancy statusline
 Plug 'christoomey/vim-tmux-navigator' " C-h,j,k,l navigation between tmux and vim
 Plug 'jgdavey/tslime.vim'
 Plug 'dietsche/vim-lastplace' " reopen a file the last place we were
-Plug 'fatih/vim-hclfmt'
 Plug 'fidian/hexmode' " view/edit binary as hex
-" Plug 'fishbullet/deoplete-ruby', {'for' : 'ruby'} " autocomplete for ruby
 Plug 'honza/vim-snippets' " snippets
 Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']} " runs tests
+" TODO: point to .local/share/fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy file search
-" Plug '~/.fzf'
-Plug 'junegunn/fzf.vim' " fuzzy file search
 Plug 'junegunn/vader.vim' " test vimscript
 Plug 'kassio/neoterm' " terminal in neovim
 Plug 'kovetskiy/vim-bash'
