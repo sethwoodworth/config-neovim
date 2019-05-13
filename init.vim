@@ -12,6 +12,7 @@ Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'} " highlights git line 
 Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'} " highlights code coverage
 Plug 'bling/vim-airline' " fancy statusline
 Plug 'christoomey/vim-tmux-navigator' " C-h,j,k,l navigation between tmux and vim
+Plug 'jgdavey/tslime.vim'
 Plug 'dietsche/vim-lastplace' " reopen a file the last place we were
 Plug 'fatih/vim-hclfmt'
 Plug 'fidian/hexmode' " view/edit binary as hex
@@ -187,7 +188,7 @@ nnoremap <leader>l :lwindow<cr>
 " `<l>p` toggle paste mode
 nnoremap <leader>p :set paste!<CR>
 " `<l>r` fold less (reduce)
-nnoremap <leader>r zr
+" nnoremap <leader>r zr
 " `<l>s` toggle show coverage
 nnoremap <leader>s :Coveragepy show<CR>
 " `<l>t` toggle Tagbar
@@ -198,6 +199,11 @@ nnoremap <leader>tt :tabe<CR>
 nnoremap <leader>v `[v`]
 " `<l>w` create vertical split
 nnoremap <leader>w <C-w>v
+
+" Send selection to tmux
+vmap <leader>r <Plug>SendSelectionToTmux
+nmap <leader>r <Plug>NormalModeSendToTmux
+nmap <leader>st <Plug>SetTmuxVars
 
 " Python language tab settings
 augroup python
@@ -308,8 +314,9 @@ let g:tagbar_type_ruby = {
     \ }
 
 " Vim-test configuration
-let test#strategy = 'neoterm'
+let test#strategy = 'tslime'
 let test#python#runner = 'pytest'
+let test#python#pytest#executable = 'dotenv -f .env-test run venv/bin/pytest -svvx'
 " let g:coveragepy_uncovered_sign = '⨴'
 let g:coveragepy_uncovered_sign = '💔'
 
