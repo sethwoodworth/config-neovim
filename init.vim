@@ -3,66 +3,60 @@ if $TERM == "screen-256color"
 end
 
 call plug#begin('~/.config/nvim/plugged')
-" Plug 'craigemery/vim-autotag'
-" Plug 'klen/python-mode', {'for' : 'python'}
-Plug 'MarcWeber/vim-addon-mw-utils' " required lib
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete async
-Plug 'SirVer/ultisnips' " snippets
-Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'} " highlights git line status
-Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'} " highlights code coverage
+Plug 'dracula/vim'  " colorscheme
 Plug 'bling/vim-airline' " fancy statusline
+
+Plug 'dietsche/vim-lastplace' " reopen a file the last place we were
+
+
+Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'} " highlights git line status
+Plug 'nathanaelkane/vim-indent-guides' " highlight indent level
+
+Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']} " runs tests
+Plug 'neomake/neomake' " async linter and highlighter
+
+Plug 'vim-python/python-syntax'
+Plug 'mitsuhiko/vim-python-combined' " improved python syntax
+Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'} " highlights code coverage
+Plug 'SirVer/ultisnips', {'for' : 'python'} " snippets
+Plug 'honza/vim-snippets', {'for' : 'python'} " snippets
+
+Plug 'kovetskiy/vim-bash', {'for' : 'bash'}
+
 Plug 'christoomey/vim-tmux-navigator' " C-h,j,k,l navigation between tmux and vim
 Plug 'jgdavey/tslime.vim'
-Plug 'dietsche/vim-lastplace' " reopen a file the last place we were
-Plug 'fidian/hexmode' " view/edit binary as hex
-Plug 'honza/vim-snippets' " snippets
-Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']} " runs tests
-" TODO: point to .local/share/fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy file search
-Plug 'junegunn/vader.vim' " test vimscript
-Plug 'kassio/neoterm' " terminal in neovim
-Plug 'kovetskiy/vim-bash'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete async
+
+Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf/', 'do': './install --all' } " fuzzy file search
+
+
+" TODO: install gutentags
 Plug 'majutsushi/tagbar' , {'on': 'TagbarToggle'} " a module map
-Plug 'nathanaelkane/vim-indent-guides' " highlight indent level
-Plug 'neomake/neomake' " async linter and highlighter
-Plug 'tomtom/tlib_vim', {'for' : ['python', 'ruby', 'html', 'css']} " library FIXME: document what requires
+
 Plug 'tpope/vim-commentary' " idiomatic line comment toggling vim syntax
 Plug 'tpope/vim-endwise' " better xml tag support
 Plug 'tpope/vim-fugitive' " git integration
 Plug 'tpope/vim-rails', {'for' : 'ruby'} " rails
 Plug 'tpope/vim-repeat' " repeat tpope vim syntax extensions
 Plug 'tpope/vim-surround' " idiomatic matching surrounding character vim syntax
-Plug 'tpope/vim-unimpaired' " pairs of extra key bindings
+" Plug 'tpope/vim-unimpaired' " pairs of extra key bindings
 Plug 'tpope/vim-vinegar' " better vim file browser
-Plug 'vim-scripts/AutoTag', {'on': 'TagbarToggle'} " auto update local tags file
 
-Plug 'vim-python/python-syntax'
-Plug 'mitsuhiko/vim-python-combined' " improved python syntax
-" Plug 'dbsr/vimpy'
-" Plug 'numirias/semshi'
 
-Plug 'kalekundert/vim-coiled-snake'
-Plug 'Konfekt/FastFold'
 Plug 'Shougo/vinarise.vim'
 
 
-" color
-" Plug 'chriskempson/base16-vim'
-" Plug 'morhetz/gruvbox' " colorscheme
-Plug 'dracula/vim'
-
-" LSP
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
-" Plug 'ryanolsonx/vim-lsp-python'
-" Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" python formatter
-Plug 'ambv/black'
+Plug 'dimbleby/black.vim'
+
 " multi-column split scrolling
 Plug 'jcorbin/vim-bindsplit'
 " make buffer of highlighted region
 Plug 'chrisbra/NrrwRgn'
+Plug 'kalekundert/vim-coiled-snake'
+Plug 'Konfekt/FastFold'
 
 call plug#end()
 
@@ -225,16 +219,16 @@ endif
 let g:fzf_layout = { 'left': '~70%' }
 
 " vim-airline
-function! NeotermStatus()
-  if exists("g:neoterm_statusline")
-    return g:neoterm_statusline
-  endif
-endfunc
+" function! NeotermStatus()
+"   if exists("g:neoterm_statusline")
+"     return g:neoterm_statusline
+"   endif
+" endfunc
 
-function! AirlineInit()
-  call airline#parts#define_function('neoterm', 'NeotermStatus')
-  let g:airline_section_warning = airline#section#create_right(['whitespace', 'neoterm'])
-endfunction
+" function! AirlineInit()
+"   call airline#parts#define_function('neoterm', 'NeotermStatus')
+"   let g:airline_section_warning = airline#section#create_right(['whitespace', 'neoterm'])
+" endfunction
 
 let g:python3_host_prog='~/.local/venvs/nvim/bin/python3'
 
