@@ -15,11 +15,6 @@ Plug 'nathanaelkane/vim-indent-guides' " highlight indent level
 Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']} " runs tests
 Plug 'neomake/neomake' " async linter and highlighter
 
-Plug 'vim-python/python-syntax'
-Plug 'mitsuhiko/vim-python-combined' " improved python syntax
-Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'} " highlights code coverage
-Plug 'SirVer/ultisnips', {'for' : 'python'} " snippets
-Plug 'honza/vim-snippets', {'for' : 'python'} " snippets
 
 Plug 'kovetskiy/vim-bash', {'for' : 'bash'}
 
@@ -27,12 +22,22 @@ Plug 'christoomey/vim-tmux-navigator' " C-h,j,k,l navigation between tmux and vi
 Plug 'jgdavey/tslime.vim'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete async
+Plug 'deoplete-plugins/deoplete-tag'
+Plug 'davidhalter/jedi', {'for': 'python'}
+Plug 'deoplete-plugins/deoplete-jedi'
+
+
+Plug 'vim-python/python-syntax'
+Plug 'mitsuhiko/vim-python-combined' " improved python syntax
+Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'} " highlights code coverage
+Plug 'SirVer/ultisnips', {'for' : 'python'} " snippets
+Plug 'honza/vim-snippets', {'for' : 'python'} " snippets
 
 Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf/', 'do': './install --all' } " fuzzy file search
 
 
-" TODO: install gutentags
 Plug 'majutsushi/tagbar' , {'on': 'TagbarToggle'} " a module map
+Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'tpope/vim-commentary' " idiomatic line comment toggling vim syntax
 Plug 'tpope/vim-endwise' " better xml tag support
@@ -47,8 +52,8 @@ Plug 'tpope/vim-vinegar' " better vim file browser
 Plug 'Shougo/vinarise.vim'
 
 
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/async.vim'
+" Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'prabirshrestha/async.vim'
 Plug 'dimbleby/black.vim'
 
 " multi-column split scrolling
@@ -77,6 +82,9 @@ set splitright " open horizontal splits right of the current pane
 set ttimeoutlen=10 " timeout to wait for followup keycodes
 set visualbell " use visual bell instead of beeping
 set wildmode=list:longest " when more than one match, list, match longest string
+
+set completeopt=menu,noinsert
+"set completeopt=menu,preview
 
 " Tabs
 set expandtab shiftwidth=2 softtabstop=2
@@ -215,22 +223,7 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
-" FZF
-let g:fzf_layout = { 'left': '~70%' }
-
-" vim-airline
-" function! NeotermStatus()
-"   if exists("g:neoterm_statusline")
-"     return g:neoterm_statusline
-"   endif
-" endfunc
-
-" function! AirlineInit()
-"   call airline#parts#define_function('neoterm', 'NeotermStatus')
-"   let g:airline_section_warning = airline#section#create_right(['whitespace', 'neoterm'])
-" endfunction
-
-let g:python3_host_prog='~/.local/venvs/nvim/bin/python3'
+let g:python3_host_prog='/home/seth/.local/venvs/nvim/bin/python3'
 
 " FZF
 " CTRL-T open in new tab
@@ -279,13 +272,19 @@ let g:neoterm_default_mod = 'vertical'
 let g:neoterm_repl_python = 'ipython --no-autoindent --simple-prompt'
 
 " Deoplete
-let g:deoplete#sources = {}
-let g:deoplete#sources.python = ['buffer', 'member', 'ultisnips', 'tag', 'omni']
-" let g:deoplete#sources.ruby = ['buffer', 'tag'] ", 'member', 'omni']
-let g:deoplete#auto_completion_start_length = 3
-let g:deoplete#max_list = 50
-let g:deoplete#auto_complete_delay = 100
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+  \ 'auto_complete_delay': 20,
+  \ 'max_list': 50,
+  \ 'sources': {
+      \ '_': ['buffer'],
+      \ 'python': ['jedi', 'buffer', 'member', 'tags', 'ultisnips', 'omni'],
+      \ },
+  \ })
+let g:deoplete#sources#jedi#enable_typeinfo = 0
+let g:deoplete#sources#jedi#python_path = './venv/bin/python'
+let g:deoplete#sources#jedi#show_docstring = 1
+call deoplete#enable_logging('DEBUG', '/tmp/deoplete_log')
 
 " Ultisnips
 let g:UltiSnipsSnippetsDir='~/.config/nvim/snippets/'
