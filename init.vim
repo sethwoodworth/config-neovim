@@ -284,7 +284,7 @@ call deoplete#custom#option({
 let g:deoplete#sources#jedi#enable_typeinfo = 0
 let g:deoplete#sources#jedi#python_path = './venv/bin/python'
 let g:deoplete#sources#jedi#show_docstring = 1
-call deoplete#enable_logging('DEBUG', '/tmp/deoplete_log')
+" call deoplete#enable_logging('DEBUG', '/tmp/deoplete_log')
 
 " Ultisnips
 let g:UltiSnipsSnippetsDir='~/.config/nvim/snippets/'
