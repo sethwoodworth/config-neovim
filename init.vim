@@ -34,6 +34,7 @@ Plug 'SirVer/ultisnips', {'for' : 'python'} " snippets
 Plug 'honza/vim-snippets', {'for' : 'python'} " snippets
 
 Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf/', 'do': './install --all' } " fuzzy file search
+Plug 'junegunn/fzf.vim'
 
 
 Plug 'majutsushi/tagbar' , {'on': 'TagbarToggle'} " a module map
@@ -83,7 +84,7 @@ set ttimeoutlen=10 " timeout to wait for followup keycodes
 set visualbell " use visual bell instead of beeping
 set wildmode=list:longest " when more than one match, list, match longest string
 
-set completeopt=menu,noinsert
+" set completeopt=menu,noselect
 "set completeopt=menu,preview
 
 " Tabs
@@ -178,8 +179,6 @@ nnoremap <leader>ev <C-w><C-v>:e $MYVIMRC<CR>
 nnoremap <leader>f :Black<CR>
 " `<l>g` toggle git status gutter
 nnoremap <leader>g :GitGutterToggle<CR>
-" `<l>h` convert all ruby hashes to hash rockets (incomplete)
-nnoremap <leader>h :s/:\(\w\+\)\s\+=>\s\+/\1: /g<CR>
 " `<l>ii` toggle vim-indent-guides
 nnoremap <leader>ii :IndentGuidesToggle<CR>
 " `<l>l` show location list, usually populated with syntax checkers
@@ -274,7 +273,7 @@ let g:neoterm_repl_python = 'ipython --no-autoindent --simple-prompt'
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
-  \ 'auto_complete_delay': 20,
+  \ 'auto_complete_delay': 10,
   \ 'max_list': 50,
   \ 'sources': {
       \ '_': ['buffer'],
@@ -282,7 +281,7 @@ call deoplete#custom#option({
       \ },
   \ })
 let g:deoplete#sources#jedi#enable_typeinfo = 0
-let g:deoplete#sources#jedi#python_path = './venv/bin/python'
+" let g:deoplete#sources#jedi#python_path = './venv/bin/python'
 let g:deoplete#sources#jedi#show_docstring = 1
 " call deoplete#enable_logging('DEBUG', '/tmp/deoplete_log')
 
