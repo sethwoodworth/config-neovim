@@ -21,10 +21,14 @@ Plug 'kovetskiy/vim-bash', {'for' : 'bash'}
 Plug 'christoomey/vim-tmux-navigator' " C-h,j,k,l navigation between tmux and vim
 Plug 'jgdavey/tslime.vim'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete async
-Plug 'deoplete-plugins/deoplete-tag'
-Plug 'davidhalter/jedi', {'for': 'python'}
-Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-bufword'
+Plug 'Shougo/neco-syntax'
+Plug 'ncm2/ncm2-syntax' 
+Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/float-preview.nvim'
+Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }
 
 
 Plug 'vim-python/python-syntax'
@@ -270,20 +274,17 @@ let g:neoterm_default_mod = 'vertical'
 " command! -nargs=+ TT Topen | Ts
 let g:neoterm_repl_python = 'ipython --no-autoindent --simple-prompt'
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-  \ 'auto_complete_delay': 10,
-  \ 'max_list': 50,
-  \ 'sources': {
-      \ '_': ['buffer'],
-      \ 'python': ['jedi', 'buffer', 'member', 'tags', 'ultisnips', 'omni'],
-      \ },
-  \ })
-let g:deoplete#sources#jedi#enable_typeinfo = 0
-" let g:deoplete#sources#jedi#python_path = './venv/bin/python'
-let g:deoplete#sources#jedi#show_docstring = 1
-" call deoplete#enable_logging('DEBUG', '/tmp/deoplete_log')
+" NCM2 autocompletion
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+
+inoremap <c-c> <ESC>
+" allows <enter> to escape completion menu
+" All instances broken and insert
+"inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+au TextChangedI * call ncm2#auto_trigger()
+let g:float_preview#docked = 0
 
 " Ultisnips
 let g:UltiSnipsSnippetsDir='~/.config/nvim/snippets/'
