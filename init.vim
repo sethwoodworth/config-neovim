@@ -4,7 +4,9 @@ end
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'dracula/vim'  " colorscheme
-Plug 'bling/vim-airline' " fancy statusline
+Plug 'NLKNguyen/papercolor-theme'  " colorscheme
+"Plug 'bling/vim-airline' " fancy statusline
+Plug 'itchyny/lightline.vim' " lightweight fancy statusline
 
 Plug 'dietsche/vim-lastplace' " reopen a file the last place we were
 
@@ -71,14 +73,22 @@ Plug 'Konfekt/FastFold'
 call plug#end()
 
 " Colorscheme
-set background=dark
-" let g:gruvbox_italic = 1
-" colorscheme gruvbox
-colorscheme dracula
+set background=light
+" colorscheme dracula
+colorscheme PaperColor
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+let g:lightline = { 'colorscheme': 'PaperColor' }
 
 " Visual behavior
 set foldlevelstart=99 " show all folds
 set list listchars=tab:·\ ,trail:≁,nbsp:∝ " show whitespace and tabs as unicode
+set noshowmode " handled by statusline
 set number " show linenumbers
 " set noautoindent " don't indent for me
 set showmatch matchtime=2 " show matching brackets
