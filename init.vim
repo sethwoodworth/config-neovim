@@ -20,7 +20,8 @@ Plug 'neomake/neomake' " async linter and highlighter
 
 Plug 'kovetskiy/vim-bash', {'for' : 'bash'}
 
-Plug 'christoomey/vim-tmux-navigator' " C-h,j,k,l navigation between tmux and vim
+" Plug 'christoomey/vim-tmux-navigator' " C-h,j,k,l navigation between tmux and vim
+Plug 'knubie/vim-kitty-navigator'
 Plug 'jgdavey/tslime.vim'
 
 Plug 'roxma/nvim-yarp'
@@ -125,10 +126,10 @@ vnoremap H ^
 vnoremap L g_
 
 " `C-h,j,k,l` switch pane focus
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 " `C-p` runs FZF fuzzy file searcher
 nnoremap <C-p> :FZF<CR>
 " `<F10>` shows syntax highlighting group under cursor
@@ -138,10 +139,10 @@ nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
 
 " Terminal mode bindings
 " Allow switching from vim terminals
-tnoremap <C-h> <C-\><C-n>h
-tnoremap <C-j> <C-\><C-n>j
-tnoremap <C-k> <C-\><C-n>k
-tnoremap <C-l> <C-\><C-n>l
+" tnoremap <C-h> <C-\><C-n>h
+" tnoremap <C-j> <C-\><C-n>j
+" tnoremap <C-k> <C-\><C-n>k
+" tnoremap <C-l> <C-\><C-n>l
 " `<ESC>` switches to Normal mode in terminal
 tnoremap <ESC> <C-\><C-n>
 
