@@ -45,7 +45,7 @@ Plug 'junegunn/fzf.vim'
 
 
 Plug 'majutsushi/tagbar' , {'on': 'TagbarToggle'} " a module map
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'tpope/vim-commentary' " idiomatic line comment toggling vim syntax
 Plug 'tpope/vim-endwise' " better xml tag support
