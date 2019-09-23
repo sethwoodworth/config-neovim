@@ -28,7 +28,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2'
 Plug 'ncm2/ncm2-bufword'
 Plug 'Shougo/neco-syntax'
-Plug 'ncm2/ncm2-syntax' 
+Plug 'ncm2/ncm2-syntax'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/float-preview.nvim'
 Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }
@@ -39,6 +39,8 @@ Plug 'mitsuhiko/vim-python-combined' " improved python syntax
 Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'} " highlights code coverage
 Plug 'SirVer/ultisnips', {'for' : 'python'} " snippets
 Plug 'honza/vim-snippets', {'for' : 'python'} " snippets
+Plug 'jeetsukumaran/vim-pythonsense', {'for' : 'python'} " python smart motion objects
+Plug 'lepture/vim-jinja'
 
 Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf/', 'do': './install --all' } " fuzzy file search
 Plug 'junegunn/fzf.vim'
@@ -59,6 +61,8 @@ Plug 'tpope/vim-vinegar' " better vim file browser
 
 Plug 'Shougo/vinarise.vim'
 
+" Rust
+Plug 'rust-lang/rust.vim'
 
 " Plug 'prabirshrestha/asyncomplete.vim'
 " Plug 'prabirshrestha/async.vim'
@@ -70,6 +74,8 @@ Plug 'jcorbin/vim-bindsplit'
 Plug 'chrisbra/NrrwRgn'
 Plug 'kalekundert/vim-coiled-snake'
 Plug 'Konfekt/FastFold'
+
+Plug 'fatih/vim-hclfmt'
 
 call plug#end()
 
@@ -119,11 +125,12 @@ vnoremap / /\M
 " `H` moves to first non-whitespace character on a line
 " `L` moves to the last non-blank character of the line
 " `Y` yanks from cursor to end of line
+" TODO implement in visual mode too
 nnoremap H ^
-nnoremap L g_
-nnoremap Y y$
 vnoremap H ^
+nnoremap L g_
 vnoremap L g_
+nnoremap Y y$
 
 " `C-h,j,k,l` switch pane focus
 " nnoremap <C-h> <C-w>h
@@ -132,6 +139,7 @@ vnoremap L g_
 " nnoremap <C-l> <C-w>l
 " `C-p` runs FZF fuzzy file searcher
 nnoremap <C-p> :FZF<CR>
+nnoremap <C-t> :Tags<CR>
 " `<F10>` shows syntax highlighting group under cursor
 nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
@@ -237,6 +245,10 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
+" Indent Guides
+hi IndentGuidesOdd  ctermbg=white
+hi IndentGuidesEven ctermbg=lightgrey
+
 let g:python3_host_prog='/home/seth/.local/venvs/nvim/bin/python3'
 
 " FZF
@@ -244,6 +256,26 @@ let g:python3_host_prog='/home/seth/.local/venvs/nvim/bin/python3'
 " CTRL-X open in horizontal split
 " CTRL-V open in vertical split
 " let g:fzf_buffers_jump = 0
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, '&signcolumn', 'no')
+
+  let height = &lines - 3
+  let width = float2nr(&columns - (&columns * 2 / 10))
+  let col = float2nr((&columns - width) / 2)
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': 1,
+        \ 'col': col,
+        \ 'width': width,
+        \ 'height': height
+        \ }
+
+  call nvim_open_win(buf, v:true, opts)
+endfunction
 
 " Git gutter
 " ]c - next change, [c - prev change
@@ -254,7 +286,7 @@ let g:gitgutter_enabled = 0
 " Neomake
 " autocmd! BufWritePost *.py Neomake pylint
 " autocmd! BufWritePost *.rb Neomake
-let g:neomake_python_enabled_makers = ['pylint']
+let g:neomake_python_enabled_makers = ['pylint', 'mypy']
 let g:neomake_ruby_enabled_makers = ['rubocop']
 " let g:neomake_logfile = '/tmp/neomake.log'
 " When writing a buffer.
@@ -301,6 +333,7 @@ let g:float_preview#docked = 0
 let g:UltiSnipsSnippetsDir='~/.config/nvim/snippets/'
 
 " Tagbar
+let g:tagbar_sort = 0
 let g:tagbar_show_visibility = 1
 " Universal Ctags rspec support
 let g:tagbar_type_ruby = {
@@ -313,9 +346,10 @@ let g:tagbar_type_ruby = {
         \ 'F:singleton methods'
     \ ]
     \ }
+let g:tagbar_compact = 1
 
 " Vim-test configuration
-let test#strategy = 'tslime'
+let test#strategy = 'kitty'
 let test#python#runner = 'pytest'
 let test#python#pytest#executable = 'dotenv -f .env-test run venv/bin/pytest -svvx'
 " let g:coveragepy_uncovered_sign = '⨴'
