@@ -3,39 +3,40 @@ if $TERM == "screen-256color"
 end
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'dracula/vim'  " colorscheme
+"Plug 'dracula/vim'  " colorscheme
 Plug 'NLKNguyen/papercolor-theme'  " colorscheme
-"Plug 'bling/vim-airline' " fancy statusline
 Plug 'itchyny/lightline.vim' " lightweight fancy statusline
 
 Plug 'dietsche/vim-lastplace' " reopen a file the last place we were
 
-
+" Git plugins
 Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'} " highlights git line status
-Plug 'nathanaelkane/vim-indent-guides' " highlight indent level
+Plug 'tpope/vim-fugitive' " git integration
 
+" Test running plugins
 Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']} " runs tests
 Plug 'neomake/neomake' " async linter and highlighter
 
+Plug 'nathanaelkane/vim-indent-guides' " highlight indent level
 
+" Syntax plugins
 Plug 'kovetskiy/vim-bash', {'for' : 'bash'}
-
-" Plug 'christoomey/vim-tmux-navigator' " C-h,j,k,l navigation between tmux and vim
-Plug 'knubie/vim-kitty-navigator'
-Plug 'jgdavey/tslime.vim'
-
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-bufword'
-Plug 'Shougo/neco-syntax'
-Plug 'ncm2/ncm2-syntax'
-Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/float-preview.nvim'
-Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }
-
-
 Plug 'vim-python/python-syntax'
 Plug 'mitsuhiko/vim-python-combined' " improved python syntax
+
+" Screen division navigation plugins
+Plug 'knubie/vim-kitty-navigator'
+
+" Autocompletion
+Plug 'roxma/nvim-yarp' " Remote plugin framework used by ncm2
+Plug 'ncm2/ncm2'  " Neovim completion manager
+Plug 'ncm2/ncm2-bufword' " Complete words in current buffers
+Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }  " Complete words from other buffers
+Plug 'ncm2/ncm2-syntax' " Complete words from language syntax
+Plug 'Shougo/neco-syntax' " Collection of syntax completions
+Plug 'ncm2/ncm2-jedi' " Python completion
+Plug 'ncm2/float-preview.nvim' " Fancy neovim floating completion preview
+
 Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'} " highlights code coverage
 Plug 'SirVer/ultisnips', {'for' : 'python'} " snippets
 Plug 'honza/vim-snippets', {'for' : 'python'} " snippets
@@ -47,11 +48,9 @@ Plug 'junegunn/fzf.vim'
 
 
 Plug 'majutsushi/tagbar' , {'on': 'TagbarToggle'} " a module map
-" Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'tpope/vim-commentary' " idiomatic line comment toggling vim syntax
 Plug 'tpope/vim-endwise' " better xml tag support
-Plug 'tpope/vim-fugitive' " git integration
 Plug 'tpope/vim-rails', {'for' : 'ruby'} " rails
 Plug 'tpope/vim-repeat' " repeat tpope vim syntax extensions
 Plug 'tpope/vim-surround' " idiomatic matching surrounding character vim syntax
@@ -66,7 +65,7 @@ Plug 'rust-lang/rust.vim'
 
 " Plug 'prabirshrestha/asyncomplete.vim'
 " Plug 'prabirshrestha/async.vim'
-Plug 'dimbleby/black.vim'
+Plug 'dimbleby/black.vim'  " Better and more simple black python formatter
 
 " multi-column split scrolling
 Plug 'jcorbin/vim-bindsplit'
@@ -75,7 +74,8 @@ Plug 'chrisbra/NrrwRgn'
 Plug 'kalekundert/vim-coiled-snake'
 Plug 'Konfekt/FastFold'
 
-Plug 'fatih/vim-hclfmt'
+" Plug 'fatih/vim-hclfmt'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
@@ -382,6 +382,9 @@ function! s:bindsplit(...) abort
     setlocal scrollbind
 endfunction
 command! -nargs=? -bar Bindsplit call s:bindsplit(<args>)
+
+" Terraform
+let g:terraform_fmt_on_save=1
 
 " allow folder specific .vimrc files
 set exrc
