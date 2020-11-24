@@ -28,14 +28,18 @@ Plug 'mitsuhiko/vim-python-combined' " improved python syntax
 Plug 'knubie/vim-kitty-navigator'
 
 " Autocompletion
-Plug 'roxma/nvim-yarp' " Remote plugin framework used by ncm2
-Plug 'ncm2/ncm2'  " Neovim completion manager
-Plug 'ncm2/ncm2-bufword' " Complete words in current buffers
-Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }  " Complete words from other buffers
-Plug 'ncm2/ncm2-syntax' " Complete words from language syntax
-Plug 'Shougo/neco-syntax' " Collection of syntax completions
-Plug 'ncm2/ncm2-jedi' " Python completion
-Plug 'ncm2/float-preview.nvim' " Fancy neovim floating completion preview
+"Plug 'roxma/nvim-yarp' " Remote plugin framework used by ncm2
+"Plug 'ncm2/ncm2'  " Neovim completion manager
+"Plug 'ncm2/ncm2-bufword' " Complete words in current buffers
+"Plug 'ncm2/ncm2-path' " path completions
+"Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }  " Complete words from other buffers
+"Plug 'ncm2/ncm2-syntax' " Complete words from language syntax
+"Plug 'Shougo/neco-syntax' " Collection of syntax completions
+"Plug 'ncm2/ncm2-jedi' " Python completion
+"Plug 'ncm2/float-preview.nvim' " Fancy neovim floating completion preview
+"" Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+" coc.nvim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'} " highlights code coverage
 Plug 'SirVer/ultisnips', {'for' : 'python'} " snippets
@@ -47,11 +51,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf/', 'do': './install --all' } "
 Plug 'junegunn/fzf.vim'
 
 
-Plug 'majutsushi/tagbar' , {'on': 'TagbarToggle'} " a module map
+Plug 'preservim/tagbar' , {'on': 'TagbarToggle'} " a module map
 
 Plug 'tpope/vim-commentary' " idiomatic line comment toggling vim syntax
-Plug 'tpope/vim-endwise' " better xml tag support
-Plug 'tpope/vim-rails', {'for' : 'ruby'} " rails
 Plug 'tpope/vim-repeat' " repeat tpope vim syntax extensions
 Plug 'tpope/vim-surround' " idiomatic matching surrounding character vim syntax
 " Plug 'tpope/vim-unimpaired' " pairs of extra key bindings
@@ -63,8 +65,6 @@ Plug 'Shougo/vinarise.vim'
 " Rust
 Plug 'rust-lang/rust.vim'
 
-" Plug 'prabirshrestha/asyncomplete.vim'
-" Plug 'prabirshrestha/async.vim'
 Plug 'dimbleby/black.vim'  " Better and more simple black python formatter
 
 " multi-column split scrolling
@@ -76,6 +76,10 @@ Plug 'Konfekt/FastFold'
 
 " Plug 'fatih/vim-hclfmt'
 Plug 'hashivim/vim-terraform'
+
+" Markdown
+Plug 'godlygeek/tabular', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 call plug#end()
 
@@ -93,6 +97,8 @@ let g:PaperColor_Theme_Options = {
 let g:lightline = { 'colorscheme': 'PaperColor' }
 
 " Visual behavior
+set updatetime=300
+set signcolumn=number
 set foldlevelstart=99 " show all folds
 set list listchars=tab:·\ ,trail:≁,nbsp:∝ " show whitespace and tabs as unicode
 set noshowmode " handled by statusline
@@ -104,9 +110,7 @@ set splitright " open horizontal splits right of the current pane
 set ttimeoutlen=10 " timeout to wait for followup keycodes
 set visualbell " use visual bell instead of beeping
 set wildmode=list:longest " when more than one match, list, match longest string
-
-" set completeopt=menu,noselect
-"set completeopt=menu,preview
+set completeopt=noinsert,menuone,noselect
 
 " Tabs
 set expandtab shiftwidth=2 softtabstop=2
@@ -191,6 +195,7 @@ nnoremap <leader>T :TagbarOpenAutoClose<CR>
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 " `<l>b` insert an IPython embed as breakpoint
 nnoremap <leader>b i__import__('IPython').embed()<esc>
+nnoremap <leader>bb ibreakpoint()<esc>
 nmap <leader>B <Plug>BindsplitVsplit
 nnoremap <leader>bs <Plug>BindsplitVsplit
 " `<l>c` vim-test run nearest test to cursor
@@ -249,7 +254,7 @@ endif
 hi IndentGuidesOdd  ctermbg=white
 hi IndentGuidesEven ctermbg=lightgrey
 
-let g:python3_host_prog='/home/seth/.local/venvs/nvim/bin/python3'
+let g:python3_host_prog='/home/seth/.local/pipx/venvs/python-language-server/bin/python3'
 
 " FZF
 " CTRL-T open in new tab
@@ -317,16 +322,12 @@ let g:neoterm_default_mod = 'vertical'
 " command! -nargs=+ TT Topen | Ts
 let g:neoterm_repl_python = 'ipython --no-autoindent --simple-prompt'
 
-" NCM2 autocompletion
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
 
 inoremap <c-c> <ESC>
 " allows <enter> to escape completion menu
 " All instances broken and insert
 "inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
-au TextChangedI * call ncm2#auto_trigger()
 let g:float_preview#docked = 0
 
 " Ultisnips
@@ -355,15 +356,6 @@ let test#python#pytest#executable = 'dotenv -f .env-test run venv/bin/pytest -sv
 " let g:coveragepy_uncovered_sign = '⨴'
 let g:coveragepy_uncovered_sign = '💔'
 
-" Vim-lsp python
-if executable('pyls')
-  au user lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
-
 function! s:bindsplit(...) abort
     if a:0
         let l:count=(a:1 - 1)
@@ -386,6 +378,61 @@ command! -nargs=? -bar Bindsplit call s:bindsplit(<args>)
 " Terraform
 let g:terraform_fmt_on_save=1
 
+" coc.nvim
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" use <tab> and <s-tab> to nav completions
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" use c-space to trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+"
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Apply AutoFix to problem on the current line.
+nmap <leader>af  <Plug>(coc-fix-current)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" vim-markdown
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_new_list_item_indent = 2
+
 " allow folder specific .vimrc files
 set exrc
 set secure
+
