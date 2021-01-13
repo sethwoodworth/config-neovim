@@ -254,7 +254,7 @@ endif
 hi IndentGuidesOdd  ctermbg=white
 hi IndentGuidesEven ctermbg=lightgrey
 
-let g:python3_host_prog='/home/seth/.local/pipx/venvs/python-language-server/bin/python3'
+let g:python3_host_prog='/home/swoodworth/.local/venvs/nvim/bin/python3'
 
 " FZF
 " CTRL-T open in new tab
