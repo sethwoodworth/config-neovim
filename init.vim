@@ -1,21 +1,18 @@
-if $TERM == "screen-256color"
-  set termguicolors
-end
+set termguicolors
 
 call plug#begin('~/.config/nvim/plugged')
-"Plug 'dracula/vim'  " colorscheme
 Plug 'NLKNguyen/papercolor-theme'  " colorscheme
+Plug 'savq/melange' " treesitter supporting colorscheme
 Plug 'itchyny/lightline.vim' " lightweight fancy statusline
 
 Plug 'dietsche/vim-lastplace' " reopen a file the last place we were
 
 " Git plugins
-Plug 'airblade/vim-gitgutter', {'on' : 'GitGutterToggle'} " highlights git line status
 Plug 'tpope/vim-fugitive' " git integration
 
 " Test running plugins
 Plug 'janko-m/vim-test', {'for' : ['python', 'ruby']} " runs tests
-Plug 'neomake/neomake' " async linter and highlighter
+"Plug 'neomake/neomake' " async linter and highlighter
 
 Plug 'nathanaelkane/vim-indent-guides' " highlight indent level
 
@@ -27,21 +24,6 @@ Plug 'mitsuhiko/vim-python-combined' " improved python syntax
 " Screen division navigation plugins
 Plug 'knubie/vim-kitty-navigator'
 
-" Autocompletion
-"Plug 'roxma/nvim-yarp' " Remote plugin framework used by ncm2
-"Plug 'ncm2/ncm2'  " Neovim completion manager
-"Plug 'ncm2/ncm2-bufword' " Complete words in current buffers
-"Plug 'ncm2/ncm2-path' " path completions
-"Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }  " Complete words from other buffers
-"Plug 'ncm2/ncm2-syntax' " Complete words from language syntax
-"Plug 'Shougo/neco-syntax' " Collection of syntax completions
-"Plug 'ncm2/ncm2-jedi' " Python completion
-"Plug 'ncm2/float-preview.nvim' " Fancy neovim floating completion preview
-"" Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-" coc.nvim
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-Plug 'alfredodeza/coveragepy.vim', {'for' : 'python'} " highlights code coverage
 Plug 'SirVer/ultisnips', {'for' : 'python'} " snippets
 Plug 'honza/vim-snippets', {'for' : 'python'} " snippets
 Plug 'jeetsukumaran/vim-pythonsense', {'for' : 'python'} " python smart motion objects
@@ -56,51 +38,49 @@ Plug 'preservim/tagbar' , {'on': 'TagbarToggle'} " a module map
 Plug 'tpope/vim-commentary' " idiomatic line comment toggling vim syntax
 Plug 'tpope/vim-repeat' " repeat tpope vim syntax extensions
 Plug 'tpope/vim-surround' " idiomatic matching surrounding character vim syntax
-" Plug 'tpope/vim-unimpaired' " pairs of extra key bindings
 Plug 'tpope/vim-vinegar' " better vim file browser
 
-
-Plug 'Shougo/vinarise.vim'
-
 " Rust
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
-Plug 'dimbleby/black.vim'  " Better and more simple black python formatter
+" Plug 'psf/black', { 'branch': 'stable' }
 
-" multi-column split scrolling
-Plug 'jcorbin/vim-bindsplit'
-" make buffer of highlighted region
-Plug 'chrisbra/NrrwRgn'
-Plug 'kalekundert/vim-coiled-snake'
-Plug 'Konfekt/FastFold'
-
-" Plug 'fatih/vim-hclfmt'
-Plug 'hashivim/vim-terraform'
+Plug 'hashivim/vim-terraform', {'for': 'terraform'}
 
 " Markdown
 Plug 'godlygeek/tabular', { 'for': 'markdown' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
+" Tree-sitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+
+" lsp
+Plug 'neovim/nvim-lspconfig'
+
+" lsp completion
+Plug 'hrsh7th/nvim-compe'
+
 call plug#end()
 
 " Colorscheme
 set background=light
-" colorscheme dracula
-colorscheme PaperColor
-let g:PaperColor_Theme_Options = {
-  \   'language': {
-  \     'python': {
-  \       'highlight_builtins' : 1
-  \     }
-  \   }
-  \ }
-let g:lightline = { 'colorscheme': 'PaperColor' }
+" let g:PaperColor_Theme_Options = {
+"   \   'language': {
+"   \     'python': {
+"   \       'highlight_builtins' : 1
+"   \     }
+"   \   }
+"   \ }
+" colorscheme PaperColor
+" let g:lightline = { 'colorscheme': 'PaperColor' }
+colorscheme melange
 
 " Visual behavior
 set updatetime=300
 set signcolumn=number
 set foldlevelstart=99 " show all folds
-set list listchars=tab:·\ ,trail:≁,nbsp:∝ " show whitespace and tabs as unicode
+set list listchars=tab:·\ ,trail:␣,nbsp:∝ " show whitespace and tabs as unicode
 set noshowmode " handled by statusline
 set number " show linenumbers
 " set noautoindent " don't indent for me
@@ -129,19 +109,13 @@ vnoremap / /\M
 " `H` moves to first non-whitespace character on a line
 " `L` moves to the last non-blank character of the line
 " `Y` yanks from cursor to end of line
-" TODO implement in visual mode too
+" `C-h,j,k,l` switch pane focus
 nnoremap H ^
 vnoremap H ^
 nnoremap L g_
 vnoremap L g_
 nnoremap Y y$
 
-" `C-h,j,k,l` switch pane focus
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
-" `C-p` runs FZF fuzzy file searcher
 nnoremap <C-p> :FZF<CR>
 nnoremap <C-t> :Tags<CR>
 " `<F10>` shows syntax highlighting group under cursor
@@ -149,30 +123,23 @@ nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" Terminal mode bindings
-" Allow switching from vim terminals
-" tnoremap <C-h> <C-\><C-n>h
-" tnoremap <C-j> <C-\><C-n>j
-" tnoremap <C-k> <C-\><C-n>k
-" tnoremap <C-l> <C-\><C-n>l
 " `<ESC>` switches to Normal mode in terminal
 tnoremap <ESC> <C-\><C-n>
 
 " Insert mode binding
 " `<F1>` sends `<ESC>`
 inoremap <F1> <ESC>
+inoremap <c-c> <ESC>
 " Command mode binding
 " `:w!!` saves file as root
 cmap w!! w !sudo tee %
 
-
 " Leader bindings
 " <space> as leader, shown here as <l>
-"
 let mapleader = " "
 " `<l>2` send line or selection to terminal
-vnoremap <Leader>2 :TREPLSendSelection
-nnoremap <Leader>2 :TREPLSendLine
+" vnoremap <Leader>2 :TREPLSendSelection
+" nnoremap <Leader>2 :TREPLSendLine
 " `<l>"'` switch " for '
 nnoremap <leader>"' :s/\"/\'/g <cr> :nohls <cr>
 " `<l>'"` switch ' for "
@@ -196,27 +163,20 @@ nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 " `<l>b` insert an IPython embed as breakpoint
 nnoremap <leader>b i__import__('IPython').embed()<esc>
 nnoremap <leader>bb ibreakpoint()<esc>
-nmap <leader>B <Plug>BindsplitVsplit
-nnoremap <leader>bs <Plug>BindsplitVsplit
 " `<l>c` vim-test run nearest test to cursor
 nnoremap <leader>c :TestNearest<CR>
 nnoremap <leader>cc :TestFile<CR>
 " `<l>ev` open vim config for editing in vertical split
 nnoremap <leader>ev <C-w><C-v>:e $MYVIMRC<CR>
-" `<l>f` format python
-nnoremap <leader>f :Black<CR>
-" `<l>g` toggle git status gutter
-nnoremap <leader>g :GitGutterToggle<CR>
 " `<l>ii` toggle vim-indent-guides
 nnoremap <leader>ii :IndentGuidesToggle<CR>
 " `<l>l` show location list, usually populated with syntax checkers
-nnoremap <leader>l :lwindow<cr>
+"nnoremap <leader>l :lwindow<cr>
+" MOVED to lsp
 " `<l>p` toggle paste mode
 nnoremap <leader>p :set paste!<CR>
 " `<l>r` fold less (reduce)
 " nnoremap <leader>r zr
-" `<l>s` toggle show coverage
-nnoremap <leader>s :Coveragepy show<CR>
 " `<l>t` toggle Tagbar
 nnoremap <leader>t :TagbarToggle<CR>
 " `<l>tt` new tabl
@@ -226,24 +186,12 @@ nnoremap <leader>v `[v`]
 " `<l>w` create vertical split
 nnoremap <leader>w <C-w>v
 
-" Send selection to tmux
-vmap <leader>r <Plug>SendSelectionToTmux
-nmap <leader>r <Plug>NormalModeSendToTmux
-nmap <leader>st <Plug>SetTmuxVars
-
 " Python language tab settings
 augroup python
   autocmd Filetype python setlocal expandtab shiftwidth=4 softtabstop=4
   " set csprg=pycscope
 augroup END
 let g:python_highlight_all = 1
-
-" cscope
-set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
-if filereadable("cscope.out")
-  set cscopetag
-  silent cs add cscope.out
-endif
 
 " Grep config
 if executable('ag')
@@ -282,52 +230,6 @@ function! FloatingFZF()
   call nvim_open_win(buf, v:true, opts)
 endfunction
 
-" Git gutter
-" ]c - next change, [c - prev change
-" <leader>hs - stage hunk
-" <leader>hs - stage hunk
-let g:gitgutter_enabled = 0
-
-" Neomake
-" autocmd! BufWritePost *.py Neomake pylint
-" autocmd! BufWritePost *.rb Neomake
-let g:neomake_python_enabled_makers = ['pylint', 'mypy']
-let g:neomake_ruby_enabled_makers = ['rubocop']
-" let g:neomake_logfile = '/tmp/neomake.log'
-" When writing a buffer.
-call neomake#configure#automake('w')
-" When writing a buffer, and on normal mode changes (after 750ms).
-call neomake#configure#automake('nw', 750)
-" When reading a buffer (after 1s), and when writing.
-call neomake#configure#automake('rw', 1000)
-let g:neomake_error_sign = {'text': '🔥', 'texthl': 'NeomakeErrorSign'}
-let g:neomake_warning_sign = {'text': '🔔', 'texthl': 'NeomakeWarningSign'}
-
-" python formatter
-" One must install black inside the same virtualenv that hosts python3_host_prog
-let g:black_virtualenv = '~/.local/venvs/nvim/'
-
-" Vim-rails
-" :A & :R jump to Alternate and Related files see: rails-alternate
-let ruby_fold = 1
-let ruby_minlines = 500
-let ruby_no_comment_fold = 1
-let ruby_operators = 1
-let ruby_space_errors = 1
-
-" Neoterm
-let g:neoterm_size = 80
-let g:neoterm_default_mod = 'vertical'
-" let g:neoterm_autoscroll = 1
-" command! -nargs=+ TT Topen | Ts
-let g:neoterm_repl_python = 'ipython --no-autoindent --simple-prompt'
-
-
-inoremap <c-c> <ESC>
-" allows <enter> to escape completion menu
-" All instances broken and insert
-"inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-
 let g:float_preview#docked = 0
 
 " Ultisnips
@@ -356,83 +258,100 @@ let test#python#pytest#executable = 'dotenv -f .env-test run venv/bin/pytest -sv
 " let g:coveragepy_uncovered_sign = '⨴'
 let g:coveragepy_uncovered_sign = '💔'
 
-function! s:bindsplit(...) abort
-    if a:0
-        let l:count=(a:1 - 1)
-    else
-        let l:count=1
-    endif
-    echom l:count
-    let l:curwin=winnr()
-    for i in range(1, l:count)
-        vsplit
-        setlocal noscrollbind
-        execute "normal! z+"
-        setlocal scrollbind
-    endfor
-    execute l:curwin . "wincmd w"
-    setlocal scrollbind
-endfunction
-command! -nargs=? -bar Bindsplit call s:bindsplit(<args>)
-
 " Terraform
 let g:terraform_fmt_on_save=1
-
-" coc.nvim
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" use <tab> and <s-tab> to nav completions
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-" use c-space to trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
-"
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Apply AutoFix to problem on the current line.
-nmap <leader>af  <Plug>(coc-fix-current)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " vim-markdown
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_new_list_item_indent = 2
 
+lua << EOF
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  -- buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>l', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+end
+local lspconfig = require('lspconfig')
+lspconfig.pylsp.setup{
+  on_attach = on_attach,
+  settings = {
+    pylsp = {
+      plugins = {
+        pylint = { enabled = true },
+        pyflakes = { enabled = false },
+        pycodestyle = { enabled = false },
+        flake8 = { enabled = false },
+        yapf = { enabled = false }
+      }
+    }
+  }
+}
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  resolve_timeout = 800;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = {
+    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+    max_width = 120,
+    min_width = 60,
+    max_height = math.floor(vim.o.lines * 0.3),
+    min_height = 1,
+  };
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    tags = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    vsnip = false;
+    ultisnips = true;
+    luasnip = false;
+  };
+}
+EOF
+
+"
+
 " allow folder specific .vimrc files
 set exrc
 set secure
-
